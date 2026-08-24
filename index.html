@@ -46,6 +46,79 @@ body {
     overflow-x: hidden;
 }
 
+/* =====================================================
+   MODO RELÓGIO EM TELA CHEIA
+===================================================== */
+
+#clock-fullscreen {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 99999;
+
+    background: #09090d;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+#fullscreen-time {
+
+    font-size: 18vw;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    color: #ffffff;
+
+    line-height: 1;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+/* Tablet 1024x600 */
+
+@media screen and (min-width: 900px) {
+
+    #fullscreen-time {
+
+        font-size: 125px;
+
+    }
+
+}
+
+
+/* Telas menores */
+
+@media screen and (max-width: 700px) {
+
+    #fullscreen-time {
+
+        font-size: 15vw;
+
+    }
+
+}
+
 
 /* =====================================================
    APP
@@ -76,7 +149,7 @@ body {
 
     position: relative;
 
-    height: 165px;
+    height: 200px;
 
     padding: 25px 40px;
 
@@ -125,7 +198,7 @@ body {
 
 #day-name {
 
-    font-size: 27px;
+    font-size: 34px;
 
     font-weight: bold;
 
@@ -139,11 +212,11 @@ body {
 
     margin-top: 12px;
 
-    font-size: 17px;
+    font-size: 21px;
 
     letter-spacing: 3px;
 
-    color: #898392;
+    color: #ffffff;
 }
 
 
@@ -159,7 +232,7 @@ body {
 
     text-align: right;
 
-    font-size: 70px;
+    font-size: 82px;
 
     line-height: 1;
 
@@ -245,9 +318,9 @@ body {
 
     width: 100%;
 
-    padding: 20px;
+    padding: 25px;
 
-    min-height: 200px;
+    min-height: 260px;
 
     margin-bottom: 15px;
 }
@@ -279,7 +352,7 @@ body {
 
     color: #ffffff;
 
-    font-size: 14px;
+    font-size: 18px;
 
     outline: none;
 }
@@ -357,7 +430,7 @@ body {
 
     color: #dedbe4;
 
-    font-size: 13px;
+    font-size: 20px;
 
     cursor: pointer;
 }
@@ -454,7 +527,7 @@ body {
 
     width: 50%;
 
-    height: 210px;
+    height: 260px;
 
     padding: 20px;
 
@@ -500,7 +573,7 @@ body {
 
     margin-top: 22px;
 
-    font-size: 43px;
+    font-size: 60px;
 
     font-weight: bold;
 
@@ -772,7 +845,7 @@ body {
 
     display: table-cell;
 
-    height: 31px;
+    height: 48px;
 
     text-align: center;
 
@@ -780,7 +853,8 @@ body {
 
     color: #a7a2ad;
 
-    font-size: 12px;
+    font-size: 18px;
+    font-weight: 600;
 
     border:
         1px solid #1f1d25;
@@ -970,6 +1044,16 @@ body {
     <div class="clock" id="clock">
         00:00
     </div>
+
+    <!-- MODO RELÓGIO EM TELA CHEIA -->
+<div id="clock-fullscreen">
+
+    <div id="fullscreen-time">
+        00:00:00
+    </div>
+
+</div>
+
 
 </header>
 
@@ -2252,10 +2336,147 @@ function() {
     renderCalendar();
 
 };
+/* =====================================================
+   MODO RELÓGIO EM TELA CHEIA
+===================================================== */
+
+var clockElement =
+    document.getElementById("clock");
+
+var fullscreenClock =
+    document.getElementById("clock-fullscreen");
+
+var fullscreenTime =
+    document.getElementById("fullscreen-time");
+
+
+/*
+   Abre o modo tela cheia
+*/
+
+function openFullscreenClock() {
+
+    fullscreenClock.style.display = "flex";
+
+    updateFullscreenClock();
+
+}
+
+
+/*
+   Fecha o modo tela cheia
+*/
+
+function closeFullscreenClock() {
+
+    fullscreenClock.style.display = "none";
+
+}
+
+
+/*
+   Atualiza o relógio com segundos
+*/
+
+function updateFullscreenClock() {
+
+    var now = new Date();
+
+
+    var hours =
+        now.getHours();
+
+    var minutes =
+        now.getMinutes();
+
+    var seconds =
+        now.getSeconds();
+
+
+    if (hours < 10) {
+
+        hours = "0" + hours;
+
+    }
+
+
+    if (minutes < 10) {
+
+        minutes = "0" + minutes;
+
+    }
+
+
+    if (seconds < 10) {
+
+        seconds = "0" + seconds;
+
+    }
+
+
+    fullscreenTime.innerHTML =
+
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds;
+
+}
+
+
+/*
+   Clique no relógio normal
+*/
+
+clockElement.onclick =
+    function(event) {
+
+        if (event) {
+
+            event.stopPropagation();
+
+        }
+
+        openFullscreenClock();
+
+    };
+
+
+/*
+   Qualquer toque na tela cheia
+   fecha o modo relógio
+*/
+
+fullscreenClock.onclick =
+    function() {
+
+        closeFullscreenClock();
+
+    };
+
+
+/*
+   Atualização dos segundos
+*/
+
+setInterval(
+
+    function() {
+
+        updateFullscreenClock();
+
+    },
+
+    1000
+
+);
 
 
 
 renderCalendar();
+
+
 
 </script>
 
@@ -2263,4 +2484,3 @@ renderCalendar();
 </body>
 
 </html>
-```

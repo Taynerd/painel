@@ -1,1247 +1,2266 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
 
-    <!-- Compatibilidade com navegadores antigos -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
 
-    <title>Meu Painel</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-  <body>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+<title>Painel de Produtividade</title>
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
 
-        width: 100%;
-        min-height: 100%;
+<style>
 
-        background: #0b0b10;
+/* =====================================================
+   RESET
+===================================================== */
 
-        color: #ffffff;
+* {
+    box-sizing: border-box;
+}
 
-        font-family: Arial, Helvetica, sans-serif;
-      }
+html,
+body {
 
-      body {
-        overflow-x: hidden;
-      }
+    margin: 0;
+    padding: 0;
 
-      /* ============================================
+    width: 100%;
+    min-height: 100%;
+
+    background: #09090d;
+
+    color: #ffffff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+body {
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
    APP
-============================================ */
+===================================================== */
 
-      .app {
-        width: 100%;
-        min-height: 100vh;
+.app {
 
-        background: linear-gradient(
-          135deg,
-          #0b0b10 0%,
-          #11101a 50%,
-          #0b0b10 100%
+    width: 100%;
+
+    min-height: 100vh;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #09090d 0%,
+            #111019 50%,
+            #09090d 100%
         );
-      }
+}
 
-      /* ============================================
+
+/* =====================================================
    CABEÇALHO
-============================================ */
+===================================================== */
 
-      .header {
-        position: relative;
+.header {
 
-        height: 145px;
+    position: relative;
 
-        padding: 25px 35px;
+    height: 165px;
 
-        background: #101017;
+    padding: 25px 40px;
 
-        border-bottom: 1px solid #25212f;
+    background: #101017;
 
-        display: table;
+    border-bottom: 1px solid #292431;
 
-        width: 100%;
+    display: table;
 
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-      }
+    width: 100%;
 
-      /*
-    Pequeno detalhe roxo no topo
-*/
+    box-shadow:
+        0 5px 25px rgba(0,0,0,0.35);
+}
 
-      .header:before {
-        content: "";
 
-        position: absolute;
+.header:before {
 
-        top: 0;
-        left: 35px;
+    content: "";
 
-        width: 55px;
-        height: 3px;
+    position: absolute;
 
-        background: #7c4dff;
-      }
+    top: 0;
+    left: 40px;
 
-      /* ============================================
+    width: 70px;
+    height: 3px;
+
+    background: #7b4fc2;
+}
+
+
+/* =====================================================
    DATA
-============================================ */
+===================================================== */
 
-      .date-area {
-        display: table-cell;
+.date-area {
 
-        vertical-align: middle;
-      }
+    display: table-cell;
 
-      #day-name {
-        font-size: 19px;
+    vertical-align: middle;
 
-        font-weight: bold;
+    width: 60%;
+}
 
-        letter-spacing: 3px;
 
-        color: #eeeeee;
-      }
+#day-name {
 
-      #full-date {
-        margin-top: 10px;
+    font-size: 27px;
 
-        font-size: 12px;
+    font-weight: bold;
 
-        letter-spacing: 2px;
+    letter-spacing: 3px;
 
-        color: #777383;
-      }
+    color: #f1eef5;
+}
 
-      /* ============================================
+
+#full-date {
+
+    margin-top: 12px;
+
+    font-size: 17px;
+
+    letter-spacing: 3px;
+
+    color: #898392;
+}
+
+
+/* =====================================================
    RELÓGIO
-============================================ */
+===================================================== */
 
-      .clock {
-        display: table-cell;
+.clock {
 
-        vertical-align: middle;
+    display: table-cell;
 
-        text-align: right;
+    vertical-align: middle;
 
-        font-size: 62px;
+    text-align: right;
 
-        line-height: 1;
+    font-size: 70px;
 
-        font-weight: bold;
+    line-height: 1;
 
-        letter-spacing: 3px;
+    font-weight: bold;
 
-        color: #ffffff;
+    letter-spacing: 3px;
 
-        text-shadow: 0 0 20px rgba(124, 77, 255, 0.18);
-      }
+    color: #ffffff;
 
-      /* ============================================
+    text-shadow:
+        0 0 20px rgba(123,79,194,0.18);
+}
+
+
+/* =====================================================
    CONTEÚDO
-============================================ */
+===================================================== */
 
-      .content {
-        width: 100%;
+.content {
 
-        padding: 22px 30px;
+    width: 100%;
 
-        display: table;
+    padding: 20px 30px;
+}
 
-        table-layout: fixed;
-      }
 
-      /* ============================================
-   CARDS
-============================================ */
+/* =====================================================
+   CARD
+===================================================== */
 
-      .card {
-        position: relative;
+.card {
 
-        display: table-cell;
+    position: relative;
 
-        vertical-align: top;
+    background: #15151d;
 
-        height: 405px;
+    border: 1px solid #292532;
 
-        padding: 22px;
+    box-shadow:
+        0 7px 25px rgba(0,0,0,0.25);
+}
 
-        background: #15151d;
 
-        border: 1px solid #272431;
+.card:before {
 
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    content: "";
 
-        overflow: hidden;
-      }
+    position: absolute;
 
-      /*
-    Linha decorativa no topo dos cards
-*/
+    top: 0;
+    left: 0;
 
-      .card:before {
-        content: "";
+    width: 100%;
+    height: 2px;
 
-        position: absolute;
+    background: #332d40;
+}
 
-        top: 0;
-        left: 0;
 
-        width: 100%;
-        height: 2px;
+/* =====================================================
+   TÍTULOS
+===================================================== */
 
-        background: #302b3d;
-      }
+.card-title {
 
-      .commitments-card {
-        width: 45%;
-      }
+    height: 35px;
 
-      .timer-card {
-        width: 27.5%;
+    font-size: 12px;
 
-        border-left: none;
-      }
+    font-weight: bold;
 
-      .countdown-card {
-        width: 27.5%;
+    letter-spacing: 2px;
 
-        border-left: none;
-      }
+    color: #918b9b;
+}
 
-      /* ============================================
-   TÍTULOS DOS CARDS
-============================================ */
 
-      .card-title {
-        height: 40px;
+/* =====================================================
+   COMPROMISSOS
+===================================================== */
 
-        font-size: 11px;
+.commitments-card {
 
-        font-weight: bold;
+    width: 100%;
 
-        letter-spacing: 2px;
+    padding: 20px;
 
-        color: #898391;
-      }
+    min-height: 200px;
 
-      #task-count {
-        float: right;
+    margin-bottom: 15px;
+}
 
-        min-width: 25px;
 
-        padding: 4px 7px;
+.add-task {
 
-        text-align: center;
+    display: table;
 
-        background: #211c2b;
+    width: 100%;
 
-        border: 1px solid #352d43;
+    margin-bottom: 12px;
+}
 
-        border-radius: 10px;
 
-        color: #a996d8;
+.add-task input {
 
-        font-size: 10px;
-      }
+    display: table-cell;
 
-      /* ============================================
-   ÁREA DE ADICIONAR TAREFA
-============================================ */
+    width: 90%;
 
-      .add-task {
-        display: table;
+    height: 42px;
 
-        width: 100%;
+    padding: 0 14px;
 
-        margin-bottom: 14px;
-      }
+    background: #0d0d13;
 
-      .add-task input {
-        display: table-cell;
+    border: 1px solid #302b38;
 
-        width: 85%;
+    color: #ffffff;
 
-        height: 43px;
+    font-size: 14px;
 
-        padding: 0 13px;
+    outline: none;
+}
 
-        background: #0d0d13;
 
-        border: 1px solid #2b2733;
+.add-task input:focus {
 
-        outline: none;
+    border-color: #7650b5;
+}
 
-        color: #ffffff;
+
+.add-task input::placeholder {
+
+    color: #56515e;
+}
+
+
+.add-task button {
+
+    display: table-cell;
+
+    width: 10%;
+
+    height: 42px;
+
+    border: 1px solid #7650b5;
+
+    background: #6945a6;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+.add-task button:active {
+
+    background: #4e337c;
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.task-list {
+
+    width: 100%;
+
+    max-height: 125px;
+
+    overflow-y: auto;
+}
+
+
+.task {
+
+    position: relative;
+
+    min-height: 39px;
+
+    margin-bottom: 6px;
+
+    padding:
+        11px
+        45px
+        11px
+        38px;
+
+    background: #1c1b24;
+
+    border: 1px solid #282530;
+
+    color: #dedbe4;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+.task:before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 2px;
+    height: 100%;
+
+    background: #553c79;
+}
+
+
+.task-checkbox {
+
+    position: absolute;
+
+    left: 12px;
+    top: 11px;
+
+    width: 15px;
+    height: 15px;
+
+    border:
+        1px solid #716a7c;
+}
+
+
+.task.completed {
+
+    color: #67626f;
+
+    text-decoration: line-through;
+}
+
+
+.task.completed .task-checkbox {
+
+    background: #7950b5;
+
+    border-color: #7950b5;
+}
+
+
+.delete-task {
+
+    position: absolute;
+
+    right: 10px;
+    top: 7px;
+
+    width: 25px;
+    height: 25px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #5d5766;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   FERRAMENTAS
+===================================================== */
+
+.tools {
+
+    display: table;
+
+    width: 100%;
+
+    table-layout: fixed;
+
+    margin-bottom: 15px;
+}
+
+
+.tool-card {
+
+    display: table-cell;
+
+    width: 50%;
+
+    height: 210px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: #15151d;
+
+    border: 1px solid #292532;
+
+    vertical-align: top;
+
+    position: relative;
+}
+
+
+.tool-card + .tool-card {
+
+    border-left: none;
+}
+
+
+.tool-title {
+
+    text-align: left;
+
+    height: 30px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #918b9b;
+}
+
+
+/* =====================================================
+   TEMPOS
+===================================================== */
+
+.big-time {
+
+    margin-top: 22px;
+
+    font-size: 43px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    color: #f4f2f7;
+}
+
+
+.buttons {
+
+    margin-top: 22px;
+
+    text-align: center;
+}
+
+
+.button {
+
+    min-width: 100px;
+
+    height: 38px;
+
+    margin: 3px;
+
+    padding: 0 12px;
+
+    background: #211f28;
+
+    border:
+        1px solid #393442;
+
+    color: #c1bdc8;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+
+.button:active {
+
+    background: #332e3d;
+
+    color: #ffffff;
+}
+
+
+.button.primary {
+
+    background: #6945a6;
+
+    border-color: #7951b7;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   INPUT TEMPORIZADOR
+===================================================== */
+
+.countdown-input {
+
+    display: table;
+
+    width: 100%;
+
+    margin-top: 3px;
+
+    text-align: center;
+}
+
+
+.countdown-input > div,
+.countdown-input > span {
+
+    display: table-cell;
+
+    vertical-align: bottom;
+}
+
+
+.countdown-input label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #625e6c;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.countdown-input input {
+
+    width: 65px;
+
+    height: 33px;
+
+    background: #0d0d13;
+
+    border:
+        1px solid #302c38;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.countdown-input > span {
+
+    width: 15px;
+
+    padding-bottom: 6px;
+
+    color: #77717f;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   CALENDÁRIO
+===================================================== */
+
+.calendar-card {
+
+    width: 100%;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.calendar-header {
+
+    display: table;
+
+    width: 100%;
+
+    height: 35px;
+}
+
+
+.calendar-title {
+
+    display: table-cell;
+
+    vertical-align: middle;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #ddd9e2;
+}
+
+
+.calendar-controls {
+
+    display: table-cell;
+
+    text-align: right;
+
+    vertical-align: middle;
+}
+
+
+.calendar-controls button {
+
+    width: 32px;
+
+    height: 28px;
+
+    margin-left: 4px;
+
+    background: #211f28;
+
+    border:
+        1px solid #393442;
+
+    color: #bcb6c5;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.calendar-controls button:active {
+
+    background: #6846a4;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   DIAS DA SEMANA
+===================================================== */
+
+.calendar-week {
+
+    display: table;
+
+    width: 100%;
+
+    table-layout: fixed;
+
+    margin-top: 10px;
+}
+
+
+.week-day {
+
+    display: table-cell;
+
+    text-align: center;
+
+    color: #625d6b;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    padding: 7px 0;
+}
+
+
+/* =====================================================
+   GRID CALENDÁRIO
+===================================================== */
+
+.calendar-grid {
+
+    display: table;
+
+    width: 100%;
+
+    table-layout: fixed;
+}
+
+
+.calendar-row {
+
+    display: table-row;
+}
+
+
+.calendar-day {
+
+    display: table-cell;
+
+    height: 31px;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    color: #a7a2ad;
+
+    font-size: 12px;
+
+    border:
+        1px solid #1f1d25;
+}
+
+
+.calendar-day.empty {
+
+    color: transparent;
+
+    background: #111117;
+}
+
+
+.calendar-day.today {
+
+    background: #6a46a5;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    border-color: #8159be;
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.footer {
+
+    height: 35px;
+
+    text-align: center;
+
+    padding-top: 8px;
+
+    color: #44404c;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   TABLETS
+===================================================== */
+
+@media screen and (max-width: 800px) {
+
+    .header {
+
+        height: 130px;
+
+        padding: 18px 20px;
+    }
+
+
+    .header:before {
+
+        left: 20px;
+    }
+
+
+    #day-name {
+
+        font-size: 20px;
+    }
+
+
+    #full-date {
 
         font-size: 13px;
-      }
+    }
 
-      .add-task input::placeholder {
-        color: #55515d;
-      }
 
-      .add-task input:focus {
-        border-color: #6542a5;
-      }
+    .clock {
 
-      .add-task button {
-        display: table-cell;
+        font-size: 48px;
+    }
 
-        width: 15%;
 
-        height: 43px;
+    .content {
 
-        border: 1px solid #6e48b5;
+        padding: 15px;
+    }
 
-        background: #6b45ad;
 
-        color: #ffffff;
+    .big-time {
 
-        font-size: 25px;
+        font-size: 34px;
+    }
 
-        font-weight: normal;
+}
 
-        cursor: pointer;
-      }
 
-      .add-task button:active {
-        background: #55358d;
-      }
+/* =====================================================
+   RETRATO
+===================================================== */
 
-      /* ============================================
-   LISTA DE COMPROMISSOS
-============================================ */
+@media screen and (orientation: portrait) {
 
-      .task-list {
-        height: 275px;
+    .header {
 
-        overflow-y: auto;
+        height: auto;
 
-        padding-right: 4px;
-      }
+        padding: 20px;
+    }
 
-      /* ============================================
-   TAREFA
-============================================ */
 
-      .task {
-        position: relative;
+    .date-area,
+    .clock {
 
-        min-height: 43px;
-
-        margin-bottom: 7px;
-
-        padding: 12px 40px 12px 39px;
-
-        background: #1b1a23;
-
-        border: 1px solid #27242e;
-
-        color: #dedbe3;
-
-        font-size: 13px;
-
-        cursor: pointer;
-
-        transition: background 0.15s;
-      }
-
-      .task:active {
-        background: #262331;
-      }
-
-      /* Linha roxa lateral */
-
-      .task:before {
-        content: "";
-
-        position: absolute;
-
-        left: 0;
-        top: 0;
-
-        width: 2px;
-        height: 100%;
-
-        background: #49356c;
-      }
-
-      /* ============================================
-   CHECKBOX
-============================================ */
-
-      .task-checkbox {
-        position: absolute;
-
-        left: 13px;
-        top: 13px;
-
-        width: 15px;
-        height: 15px;
-
-        border: 1px solid #655d70;
-
-        background: transparent;
-      }
-
-      /* ============================================
-   TAREFA CONCLUÍDA
-============================================ */
-
-      .task.completed {
-        color: #66626d;
-
-        text-decoration: line-through;
-      }
-
-      .task.completed .task-checkbox {
-        background: #7650b6;
-
-        border-color: #7650b6;
-      }
-
-      /* ============================================
-   BOTÃO EXCLUIR
-============================================ */
-
-      .delete-task {
-        position: absolute;
-
-        right: 9px;
-        top: 7px;
-
-        width: 25px;
-        height: 25px;
-
-        border: none;
-
-        background: transparent;
-
-        color: #57525f;
-
-        font-size: 17px;
-
-        cursor: pointer;
-      }
-
-      .delete-task:active {
-        color: #ffffff;
-      }
-
-      /* ============================================
-   CRONÔMETRO
-============================================ */
-
-      .timer-card {
-        text-align: center;
-      }
-
-      .timer-card .card-title,
-      .countdown-card .card-title {
-        text-align: left;
-      }
-
-      .big-time {
-        margin-top: 52px;
-
-        font-size: 43px;
-
-        line-height: 1;
-
-        font-weight: bold;
-
-        letter-spacing: 2px;
-
-        color: #f4f2f7;
-
-        text-shadow: 0 0 18px rgba(124, 77, 255, 0.12);
-      }
-
-      /* ============================================
-   BOTÕES
-============================================ */
-
-      .buttons {
-        margin-top: 48px;
-
-        text-align: center;
-      }
-
-      .button {
-        min-width: 100px;
-
-        height: 40px;
-
-        margin: 3px;
-
-        padding: 0 12px;
-
-        background: #201e27;
-
-        border: 1px solid #373240;
-
-        color: #b9b5c0;
-
-        font-size: 10px;
-
-        font-weight: bold;
-
-        letter-spacing: 1px;
-
-        cursor: pointer;
-      }
-
-      .button:active {
-        background: #302b3a;
-
-        color: #ffffff;
-      }
-
-      .button.primary {
-        background: #6b45ad;
-
-        border-color: #7952bd;
-
-        color: #ffffff;
-
-        box-shadow: 0 4px 15px rgba(107, 69, 173, 0.18);
-      }
-
-      .button.primary:active {
-        background: #55358d;
-      }
-
-      /* ============================================
-   TEMPORIZADOR
-============================================ */
-
-      .countdown-input {
-        margin-top: 5px;
-
-        display: table;
-
-        width: 100%;
-
-        text-align: center;
-      }
-
-      .countdown-input > div,
-      .countdown-input > span {
-        display: table-cell;
-
-        vertical-align: bottom;
-      }
-
-      .countdown-input label {
         display: block;
 
-        margin-bottom: 5px;
-
-        color: #625e69;
-
-        font-size: 8px;
-
-        letter-spacing: 1px;
-      }
-
-      .countdown-input input {
-        width: 65px;
-
-        height: 35px;
-
-        background: #0d0d13;
-
-        border: 1px solid #302c38;
-
-        color: #ffffff;
-
         text-align: center;
 
-        font-size: 16px;
+        width: 100%;
+    }
 
-        outline: none;
-      }
 
-      .countdown-input input:focus {
-        border-color: #6542a5;
-      }
+    .clock {
 
-      .countdown-input > span {
-        width: 15px;
+        margin-top: 15px;
 
-        padding-bottom: 7px;
+        font-size: 48px;
+    }
 
-        color: #6d6875;
 
-        font-size: 18px;
-      }
+    .tools {
 
-      /* ============================================
-   TEMPORIZADOR FINALIZADO
-============================================ */
+        display: block;
+    }
 
-      .countdown-finished {
-        color: #ffffff !important;
 
-        text-shadow: 0 0 20px rgba(124, 77, 255, 0.5);
-      }
+    .tool-card {
 
-      /* ============================================
-   RODAPÉ
-============================================ */
+        display: block;
 
-      .footer {
-        height: 40px;
+        width: 100%;
 
-        padding-top: 12px;
+        margin-bottom: 15px;
 
-        text-align: center;
+        border-left: 1px solid #292532;
+    }
 
-        color: #44414c;
 
-        font-size: 8px;
+    .calendar-day {
 
-        letter-spacing: 3px;
-      }
+        height: 38px;
+    }
 
-      /* ============================================
-   TABLETS
-============================================ */
+}
 
-      @media screen and (max-width: 800px) {
-        .header {
-          height: 115px;
+</style>
 
-          padding: 18px 20px;
-        }
+</head>
 
-        .header:before {
-          left: 20px;
-        }
 
-        #day-name {
-          font-size: 14px;
+<body>
 
-          letter-spacing: 2px;
-        }
 
-        #full-date {
-          font-size: 10px;
-        }
+<div class="app">
 
-        .clock {
-          font-size: 43px;
-        }
 
-        .content {
-          padding: 15px;
-        }
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
-        .card {
-          padding: 16px;
+<header class="header">
 
-          height: 370px;
-        }
+    <div class="date-area">
 
-        .big-time {
-          font-size: 34px;
-        }
-
-        .button {
-          min-width: 82px;
-
-          height: 38px;
-        }
-      }
-
-      /* ============================================
-   MODO RETRATO
-============================================ */
-
-      @media screen and (orientation: portrait) {
-        .header {
-          height: auto;
-
-          padding: 20px;
-        }
-
-        .date-area,
-        .clock {
-          display: block;
-
-          text-align: center;
-        }
-
-        .clock {
-          margin-top: 15px;
-
-          font-size: 48px;
-        }
-
-        .content {
-          display: block;
-
-          padding: 15px;
-        }
-
-        .card {
-          display: block;
-
-          width: 100% !important;
-
-          height: auto;
-
-          min-height: 360px;
-
-          margin-bottom: 15px;
-
-          border-left: 1px solid #272431;
-        }
-
-        .task-list {
-          height: 220px;
-        }
-      }
-    </style>
-
-    <div class="app">
-      <!-- CABEÇALHO -->
-      <header class="header">
-        <div class="date-area">
-          <div id="day-name">SEGUNDA-FEIRA</div>
-          <div id="full-date">24 DE AGOSTO DE 2026</div>
+        <div id="day-name">
+            SEGUNDA-FEIRA
         </div>
 
-        <div class="clock" id="clock">00:00</div>
-      </header>
+        <div id="full-date">
+            24 DE AGOSTO DE 2026
+        </div>
 
-      <!-- CONTEÚDO PRINCIPAL -->
-      <main class="content">
-        <!-- COMPROMISSOS -->
-        <section class="card commitments-card">
-          <div class="card-title">
-            <span>COMPROMISSOS</span>
-            <span id="task-count">0</span>
-          </div>
+    </div>
 
-          <div class="add-task">
+
+    <div class="clock" id="clock">
+        00:00
+    </div>
+
+</header>
+
+
+
+<div class="content">
+
+
+<!-- =====================================================
+     COMPROMISSOS
+===================================================== -->
+
+<section class="card commitments-card">
+
+    <div class="card-title">
+
+        COMPROMISSOS
+
+        <span id="task-count"
+              style="
+              float:right;
+              background:#211c2b;
+              padding:4px 8px;
+              border-radius:10px;
+              color:#a996d8;
+              font-size:10px;
+              ">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="add-task">
+
+        <input
+            type="text"
+            id="task-input"
+            placeholder="Adicionar compromisso..."
+            maxlength="80"
+        >
+
+        <button id="add-task-button">
+            +
+        </button>
+
+    </div>
+
+
+    <div id="task-list"
+         class="task-list">
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CRONÔMETRO + TEMPORIZADOR
+===================================================== -->
+
+<div class="tools">
+
+
+<!-- CRONÔMETRO -->
+
+<section class="tool-card">
+
+    <div class="tool-title">
+        CRONÔMETRO
+    </div>
+
+
+    <div class="big-time"
+         id="stopwatch">
+
+        00:00:00
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="button primary"
+            id="stopwatch-start">
+
+            INICIAR
+
+        </button>
+
+
+        <button
+            class="button"
+            id="stopwatch-reset">
+
+            ZERAR
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- TEMPORIZADOR -->
+
+<section class="tool-card">
+
+    <div class="tool-title">
+        TEMPORIZADOR
+    </div>
+
+
+    <div class="countdown-input">
+
+        <div>
+
+            <label>MIN</label>
+
             <input
-              type="text"
-              id="task-input"
-              placeholder="Adicionar compromisso..."
-              maxlength="80"
-            />
-
-            <button id="add-task-button">+</button>
-          </div>
-
-          <div id="task-list" class="task-list">
-            <!-- tarefas aparecem aqui -->
-          </div>
-        </section>
-
-        <!-- CRONÔMETRO -->
-        <section class="card timer-card">
-          <div class="card-title">CRONÔMETRO</div>
-
-          <div class="big-time" id="stopwatch">00:00:00</div>
-
-          <div class="buttons">
-            <button class="button primary" id="stopwatch-start">INICIAR</button>
-
-            <button class="button" id="stopwatch-reset">ZERAR</button>
-          </div>
-        </section>
-
-        <!-- TEMPORIZADOR -->
-        <section class="card countdown-card">
-          <div class="card-title">TEMPORIZADOR</div>
-
-          <div class="countdown-input">
-            <div>
-              <label>MIN</label>
-              <input
                 type="number"
                 id="minutes-input"
                 value="25"
                 min="0"
                 max="99"
-              />
-            </div>
+            >
 
-            <span>:</span>
+        </div>
 
-            <div>
-              <label>SEG</label>
-              <input
+
+        <span>:</span>
+
+
+        <div>
+
+            <label>SEG</label>
+
+            <input
                 type="number"
                 id="seconds-input"
                 value="00"
                 min="0"
                 max="59"
-              />
-            </div>
-          </div>
+            >
 
-          <div class="big-time" id="countdown">25:00</div>
+        </div>
 
-          <div class="buttons">
-            <button class="button primary" id="countdown-start">INICIAR</button>
-
-            <button class="button" id="countdown-reset">ZERAR</button>
-          </div>
-        </section>
-      </main>
-
-      <!-- RODAPÉ -->
-      <footer class="footer">PAINEL DE PRODUTIVIDADE</footer>
     </div>
 
-    <script type="text/javascript" src="script.js"></script>
 
-    <script>
-      /*
+    <div class="big-time"
+         id="countdown">
+
+        25:00
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="button primary"
+            id="countdown-start">
+
+            INICIAR
+
+        </button>
+
+
+        <button
+            class="button"
+            id="countdown-reset">
+
+            ZERAR
+
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+
+
+<!-- =====================================================
+     CALENDÁRIO
+===================================================== -->
+
+<section class="card calendar-card">
+
+
+    <div class="calendar-header">
+
+        <div class="calendar-title"
+             id="calendar-title">
+
+            AGOSTO 2026
+
+        </div>
+
+
+        <div class="calendar-controls">
+
+            <button id="previous-month">
+                ‹
+            </button>
+
+            <button id="next-month">
+                ›
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="calendar-week">
+
+        <div class="week-day">DOM</div>
+        <div class="week-day">SEG</div>
+        <div class="week-day">TER</div>
+        <div class="week-day">QUA</div>
+        <div class="week-day">QUI</div>
+        <div class="week-day">SEX</div>
+        <div class="week-day">SÁB</div>
+
+    </div>
+
+
+    <div
+        class="calendar-grid"
+        id="calendar-grid">
+    </div>
+
+
+</section>
+
+
+</div>
+
+
+<footer class="footer">
+
     PAINEL DE PRODUTIVIDADE
-    JavaScript puro
-    Compatível com navegadores antigos
-*/
 
-      /* =====================================================
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
    DATA E HORA
 ===================================================== */
 
-      var days = [
-        "DOMINGO",
-        "SEGUNDA-FEIRA",
-        "TERÇA-FEIRA",
-        "QUARTA-FEIRA",
-        "QUINTA-FEIRA",
-        "SEXTA-FEIRA",
-        "SÁBADO",
-      ];
+var days = [
 
-      var months = [
-        "JANEIRO",
-        "FEVEREIRO",
-        "MARÇO",
-        "ABRIL",
-        "MAIO",
-        "JUNHO",
-        "JULHO",
-        "AGOSTO",
-        "SETEMBRO",
-        "OUTUBRO",
-        "NOVEMBRO",
-        "DEZEMBRO",
-      ];
+    "DOMINGO",
+    "SEGUNDA-FEIRA",
+    "TERÇA-FEIRA",
+    "QUARTA-FEIRA",
+    "QUINTA-FEIRA",
+    "SEXTA-FEIRA",
+    "SÁBADO"
 
-      function updateDateTime() {
-        var now = new Date();
+];
 
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
 
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
+var months = [
 
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
+    "JANEIRO",
+    "FEVEREIRO",
+    "MARÇO",
+    "ABRIL",
+    "MAIO",
+    "JUNHO",
+    "JULHO",
+    "AGOSTO",
+    "SETEMBRO",
+    "OUTUBRO",
+    "NOVEMBRO",
+    "DEZEMBRO"
 
-        document.getElementById("clock").innerHTML = hours + ":" + minutes;
+];
 
-        document.getElementById("day-name").innerHTML = days[now.getDay()];
 
-        document.getElementById("full-date").innerHTML =
-          now.getDate() +
-          " DE " +
-          months[now.getMonth()] +
-          " DE " +
-          now.getFullYear();
-      }
+function updateDateTime() {
 
-      updateDateTime();
+    var now = new Date();
 
-      setInterval(updateDateTime, 1000);
 
-      /* =====================================================
+    var hours = now.getHours();
+
+    var minutes = now.getMinutes();
+
+
+    if (hours < 10) {
+
+        hours = "0" + hours;
+
+    }
+
+
+    if (minutes < 10) {
+
+        minutes = "0" + minutes;
+
+    }
+
+
+    document.getElementById("clock").innerHTML =
+        hours + ":" + minutes;
+
+
+    document.getElementById("day-name").innerHTML =
+        days[now.getDay()];
+
+
+    document.getElementById("full-date").innerHTML =
+
+        now.getDate() +
+        " DE " +
+        months[now.getMonth()] +
+        " DE " +
+        now.getFullYear();
+
+}
+
+
+updateDateTime();
+
+setInterval(updateDateTime, 1000);
+
+
+
+/* =====================================================
    COMPROMISSOS
 ===================================================== */
 
-      var tasks = [];
+var tasks = [];
 
-      try {
-        var savedTasks = localStorage.getItem("tablet_tasks");
 
-        if (savedTasks) {
-          tasks = JSON.parse(savedTasks);
-        }
-      } catch (e) {
-        tasks = [];
-      }
+try {
 
-      function saveTasks() {
-        try {
-          localStorage.setItem("tablet_tasks", JSON.stringify(tasks));
-        } catch (e) {
-          // Caso o navegador não permita localStorage.
-        }
-      }
+    var saved =
+        localStorage.getItem("tablet_tasks");
 
-      function renderTasks() {
-        var list = document.getElementById("task-list");
+    if (saved) {
 
-        list.innerHTML = "";
+        tasks = JSON.parse(saved);
 
-        var i;
+    }
 
-        for (i = 0; i < tasks.length; i++) {
-          var task = tasks[i];
+} catch (e) {
 
-          var div = document.createElement("div");
+    tasks = [];
 
-          div.className = "task";
+}
 
-          if (task.completed) {
+
+
+function saveTasks() {
+
+    try {
+
+        localStorage.setItem(
+            "tablet_tasks",
+            JSON.stringify(tasks)
+        );
+
+    } catch (e) {}
+
+}
+
+
+
+function escapeHtml(text) {
+
+    return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+function renderTasks() {
+
+    var list =
+        document.getElementById("task-list");
+
+
+    list.innerHTML = "";
+
+
+    var i;
+
+
+    for (i = 0; i < tasks.length; i++) {
+
+        var task = tasks[i];
+
+
+        var div =
+            document.createElement("div");
+
+
+        div.className = "task";
+
+
+        if (task.completed) {
+
             div.className += " completed";
-          }
 
-          var checkbox = document.createElement("span");
+        }
 
-          checkbox.className = "task-checkbox";
 
-          var text = document.createElement("span");
+        var checkbox =
+            document.createElement("span");
 
-          text.innerHTML = escapeHtml(task.text);
 
-          var deleteButton = document.createElement("button");
+        checkbox.className =
+            "task-checkbox";
 
-          deleteButton.className = "delete-task";
 
-          deleteButton.innerHTML = "×";
+        var text =
+            document.createElement("span");
 
-          (function (index) {
-            div.onclick = function () {
-              tasks[index].completed = !tasks[index].completed;
 
-              saveTasks();
+        text.innerHTML =
+            escapeHtml(task.text);
 
-              renderTasks();
+
+        var deleteButton =
+            document.createElement("button");
+
+
+        deleteButton.className =
+            "delete-task";
+
+
+        deleteButton.innerHTML =
+            "×";
+
+
+        (function(index) {
+
+
+            div.onclick = function() {
+
+                tasks[index].completed =
+                    !tasks[index].completed;
+
+                saveTasks();
+
+                renderTasks();
+
             };
 
-            deleteButton.onclick = function (event) {
-              if (event) {
-                event.cancelBubble = true;
-              }
 
-              tasks.splice(index, 1);
+            deleteButton.onclick =
+                function(event) {
 
-              saveTasks();
+                    if (event) {
 
-              renderTasks();
-            };
-          })(i);
+                        event.cancelBubble =
+                            true;
 
-          div.appendChild(checkbox);
+                    }
 
-          div.appendChild(text);
 
-          div.appendChild(deleteButton);
+                    tasks.splice(index, 1);
 
-          list.appendChild(div);
-        }
+                    saveTasks();
 
-        document.getElementById("task-count").innerHTML = tasks.length;
-      }
+                    renderTasks();
 
-      function escapeHtml(text) {
-        return String(text)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
+                };
 
-      function addTask() {
-        var input = document.getElementById("task-input");
 
-        var text = input.value.replace(/^\s+|\s+$/g, "");
+        })(i);
 
-        if (text === "") {
-          return;
-        }
 
-        tasks.push({
-          text: text,
+        div.appendChild(checkbox);
 
-          completed: false,
-        });
+        div.appendChild(text);
 
-        saveTasks();
+        div.appendChild(deleteButton);
 
-        renderTasks();
+        list.appendChild(div);
 
-        input.value = "";
+    }
 
-        input.focus();
-      }
 
-      document.getElementById("add-task-button").onclick = addTask;
+    document.getElementById("task-count").innerHTML =
+        tasks.length;
 
-      document.getElementById("task-input").onkeypress = function (event) {
-        event = event || window.event;
+}
 
-        if (event.keyCode === 13) {
-          addTask();
-        }
-      };
 
-      renderTasks();
 
-      /* =====================================================
+function addTask() {
+
+    var input =
+        document.getElementById("task-input");
+
+
+    var text =
+        input.value.replace(
+            /^\s+|\s+$/g,
+            ""
+        );
+
+
+    if (text === "") {
+
+        return;
+
+    }
+
+
+    tasks.push({
+
+        text: text,
+
+        completed: false
+
+    });
+
+
+    saveTasks();
+
+    renderTasks();
+
+
+    input.value = "";
+
+    input.focus();
+
+}
+
+
+
+document.getElementById(
+    "add-task-button"
+).onclick = addTask;
+
+
+
+document.getElementById(
+    "task-input"
+).onkeypress =
+
+function(event) {
+
+    event = event || window.event;
+
+
+    if (event.keyCode === 13) {
+
+        addTask();
+
+    }
+
+};
+
+
+renderTasks();
+
+
+
+/* =====================================================
    CRONÔMETRO
 ===================================================== */
 
-      var stopwatchRunning = false;
+var stopwatchRunning = false;
 
-      var stopwatchSeconds = 0;
+var stopwatchSeconds = 0;
 
-      var stopwatchInterval = null;
+var stopwatchInterval = null;
 
-      function formatStopwatch(seconds) {
-        var hours = Math.floor(seconds / 3600);
 
-        var minutes = Math.floor((seconds % 3600) / 60);
 
-        var secs = seconds % 60;
+function formatStopwatch(seconds) {
 
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
+    var hours =
+        Math.floor(seconds / 3600);
 
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
 
-        if (secs < 10) {
-          secs = "0" + secs;
-        }
+    var minutes =
+        Math.floor(
+            (seconds % 3600) / 60
+        );
 
-        return hours + ":" + minutes + ":" + secs;
-      }
 
-      function updateStopwatch() {
-        document.getElementById("stopwatch").innerHTML =
-          formatStopwatch(stopwatchSeconds);
-      }
+    var secs =
+        seconds % 60;
 
-      function startStopwatch() {
-        if (stopwatchRunning) {
-          stopwatchRunning = false;
 
-          clearInterval(stopwatchInterval);
+    if (hours < 10) {
 
-          document.getElementById("stopwatch-start").innerHTML = "CONTINUAR";
+        hours = "0" + hours;
 
-          return;
-        }
+    }
 
-        stopwatchRunning = true;
 
-        document.getElementById("stopwatch-start").innerHTML = "PAUSAR";
+    if (minutes < 10) {
 
-        stopwatchInterval = setInterval(function () {
-          stopwatchSeconds++;
+        minutes = "0" + minutes;
 
-          updateStopwatch();
-        }, 1000);
-      }
+    }
 
-      function resetStopwatch() {
+
+    if (secs < 10) {
+
+        secs = "0" + secs;
+
+    }
+
+
+    return hours + ":" +
+           minutes + ":" +
+           secs;
+
+}
+
+
+
+function updateStopwatch() {
+
+    document.getElementById(
+        "stopwatch"
+    ).innerHTML =
+        formatStopwatch(
+            stopwatchSeconds
+        );
+
+}
+
+
+
+function startStopwatch() {
+
+    if (stopwatchRunning) {
+
         stopwatchRunning = false;
 
-        clearInterval(stopwatchInterval);
+        clearInterval(
+            stopwatchInterval
+        );
 
-        stopwatchSeconds = 0;
 
-        updateStopwatch();
+        document.getElementById(
+            "stopwatch-start"
+        ).innerHTML =
+            "CONTINUAR";
 
-        document.getElementById("stopwatch-start").innerHTML = "INICIAR";
-      }
 
-      document.getElementById("stopwatch-start").onclick = startStopwatch;
+        return;
 
-      document.getElementById("stopwatch-reset").onclick = resetStopwatch;
+    }
 
-      /* =====================================================
+
+    stopwatchRunning = true;
+
+
+    document.getElementById(
+        "stopwatch-start"
+    ).innerHTML =
+        "PAUSAR";
+
+
+    stopwatchInterval =
+        setInterval(
+
+            function() {
+
+                stopwatchSeconds++;
+
+                updateStopwatch();
+
+            },
+
+            1000
+
+        );
+
+}
+
+
+
+function resetStopwatch() {
+
+    stopwatchRunning = false;
+
+    clearInterval(
+        stopwatchInterval
+    );
+
+
+    stopwatchSeconds = 0;
+
+
+    updateStopwatch();
+
+
+    document.getElementById(
+        "stopwatch-start"
+    ).innerHTML =
+        "INICIAR";
+
+}
+
+
+
+document.getElementById(
+    "stopwatch-start"
+).onclick =
+    startStopwatch;
+
+
+
+document.getElementById(
+    "stopwatch-reset"
+).onclick =
+    resetStopwatch;
+
+
+
+/* =====================================================
    TEMPORIZADOR
 ===================================================== */
 
-      var countdownRunning = false;
+var countdownRunning = false;
 
-      var countdownSeconds = 1500;
+var countdownSeconds = 1500;
 
-      var countdownInterval = null;
+var countdownInterval = null;
 
-      function getCountdownInput() {
-        var minutes = parseInt(
-          document.getElementById("minutes-input").value,
-          10,
+
+
+function getCountdownInput() {
+
+    var minutes =
+        parseInt(
+            document.getElementById(
+                "minutes-input"
+            ).value,
+            10
         );
 
-        var seconds = parseInt(
-          document.getElementById("seconds-input").value,
-          10,
+
+    var seconds =
+        parseInt(
+            document.getElementById(
+                "seconds-input"
+            ).value,
+            10
         );
 
-        if (isNaN(minutes)) {
-          minutes = 0;
-        }
 
-        if (isNaN(seconds)) {
-          seconds = 0;
-        }
+    if (isNaN(minutes)) {
 
-        if (seconds > 59) {
-          seconds = 59;
-        }
+        minutes = 0;
 
-        if (seconds < 0) {
-          seconds = 0;
-        }
+    }
 
-        if (minutes < 0) {
-          minutes = 0;
-        }
 
-        return minutes * 60 + seconds;
-      }
+    if (isNaN(seconds)) {
 
-      function formatCountdown(seconds) {
-        var minutes = Math.floor(seconds / 60);
+        seconds = 0;
 
-        var secs = seconds % 60;
+    }
 
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
 
-        if (secs < 10) {
-          secs = "0" + secs;
-        }
+    if (seconds > 59) {
 
-        return minutes + ":" + secs;
-      }
+        seconds = 59;
 
-      function updateCountdown() {
-        document.getElementById("countdown").innerHTML =
-          formatCountdown(countdownSeconds);
-      }
+    }
 
-      function startCountdown() {
-        if (countdownRunning) {
-          countdownRunning = false;
 
-          clearInterval(countdownInterval);
+    if (minutes < 0) {
 
-          document.getElementById("countdown-start").innerHTML = "CONTINUAR";
+        minutes = 0;
 
-          return;
-        }
+    }
 
-        if (countdownSeconds <= 0) {
-          countdownSeconds = getCountdownInput();
-        }
 
-        if (countdownSeconds <= 0) {
-          return;
-        }
+    return (
+        minutes * 60
+    ) + seconds;
 
-        countdownRunning = true;
+}
 
-        document.getElementById("countdown-start").innerHTML = "PAUSAR";
 
-        countdownInterval = setInterval(function () {
-          countdownSeconds--;
 
-          updateCountdown();
+function formatCountdown(seconds) {
 
-          if (countdownSeconds <= 0) {
-            finishCountdown();
-          }
-        }, 1000);
-      }
+    var minutes =
+        Math.floor(
+            seconds / 60
+        );
 
-      function finishCountdown() {
+
+    var secs =
+        seconds % 60;
+
+
+    if (minutes < 10) {
+
+        minutes =
+            "0" + minutes;
+
+    }
+
+
+    if (secs < 10) {
+
+        secs =
+            "0" + secs;
+
+    }
+
+
+    return minutes + ":" + secs;
+
+}
+
+
+
+function updateCountdown() {
+
+    document.getElementById(
+        "countdown"
+    ).innerHTML =
+        formatCountdown(
+            countdownSeconds
+        );
+
+}
+
+
+
+function startCountdown() {
+
+    if (countdownRunning) {
+
         countdownRunning = false;
 
-        clearInterval(countdownInterval);
+        clearInterval(
+            countdownInterval
+        );
 
-        document.getElementById("countdown-start").innerHTML = "INICIAR";
 
-        document.getElementById("countdown").className =
-          "big-time countdown-finished";
+        document.getElementById(
+            "countdown-start"
+        ).innerHTML =
+            "CONTINUAR";
 
-        try {
-          if (navigator.vibrate) {
-            navigator.vibrate([500, 200, 500]);
-          }
-        } catch (e) {}
 
-        setTimeout(function () {
-          document.getElementById("countdown").className = "big-time";
-        }, 5000);
-      }
+        return;
 
-      function resetCountdown() {
-        countdownRunning = false;
+    }
 
-        clearInterval(countdownInterval);
 
-        countdownSeconds = getCountdownInput();
+    if (countdownSeconds <= 0) {
+
+        countdownSeconds =
+            getCountdownInput();
+
+    }
+
+
+    if (countdownSeconds <= 0) {
+
+        return;
+
+    }
+
+
+    countdownRunning = true;
+
+
+    document.getElementById(
+        "countdown-start"
+    ).innerHTML =
+        "PAUSAR";
+
+
+    countdownInterval =
+        setInterval(
+
+            function() {
+
+                countdownSeconds--;
+
+                updateCountdown();
+
+
+                if (
+                    countdownSeconds <= 0
+                ) {
+
+                    finishCountdown();
+
+                }
+
+            },
+
+            1000
+
+        );
+
+}
+
+
+
+function finishCountdown() {
+
+    countdownRunning = false;
+
+
+    clearInterval(
+        countdownInterval
+    );
+
+
+    document.getElementById(
+        "countdown-start"
+    ).innerHTML =
+        "INICIAR";
+
+
+    try {
+
+        if (
+            navigator.vibrate
+        ) {
+
+            navigator.vibrate(
+                [500, 200, 500]
+            );
+
+        }
+
+    } catch (e) {}
+
+}
+
+
+
+function resetCountdown() {
+
+    countdownRunning = false;
+
+
+    clearInterval(
+        countdownInterval
+    );
+
+
+    countdownSeconds =
+        getCountdownInput();
+
+
+    updateCountdown();
+
+
+    document.getElementById(
+        "countdown-start"
+    ).innerHTML =
+        "INICIAR";
+
+}
+
+
+
+document.getElementById(
+    "countdown-start"
+).onclick =
+    startCountdown;
+
+
+
+document.getElementById(
+    "countdown-reset"
+).onclick =
+    resetCountdown;
+
+
+
+document.getElementById(
+    "minutes-input"
+).onchange =
+
+function() {
+
+    if (!countdownRunning) {
+
+        countdownSeconds =
+            getCountdownInput();
 
         updateCountdown();
 
-        document.getElementById("countdown-start").innerHTML = "INICIAR";
+    }
 
-        document.getElementById("countdown").className = "big-time";
-      }
+};
 
-      document.getElementById("countdown-start").onclick = startCountdown;
 
-      document.getElementById("countdown-reset").onclick = resetCountdown;
 
-      document.getElementById("minutes-input").onchange = function () {
-        if (!countdownRunning) {
-          countdownSeconds = getCountdownInput();
+document.getElementById(
+    "seconds-input"
+).onchange =
 
-          updateCountdown();
+function() {
+
+    if (!countdownRunning) {
+
+        countdownSeconds =
+            getCountdownInput();
+
+        updateCountdown();
+
+    }
+
+};
+
+
+
+updateCountdown();
+
+updateStopwatch();
+
+
+
+/* =====================================================
+   CALENDÁRIO
+===================================================== */
+
+var calendarDate =
+    new Date();
+
+
+var calendarMonth =
+    calendarDate.getMonth();
+
+
+var calendarYear =
+    calendarDate.getFullYear();
+
+
+
+function renderCalendar() {
+
+    var grid =
+        document.getElementById(
+            "calendar-grid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    var title =
+        document.getElementById(
+            "calendar-title"
+        );
+
+
+    title.innerHTML =
+        months[calendarMonth] +
+        " " +
+        calendarYear;
+
+
+    var firstDay =
+        new Date(
+            calendarYear,
+            calendarMonth,
+            1
+        ).getDay();
+
+
+    var totalDays =
+        new Date(
+            calendarYear,
+            calendarMonth + 1,
+            0
+        ).getDate();
+
+
+    var day = 1;
+
+    var row;
+
+
+    for (
+        row = 0;
+        row < 6;
+        row++
+    ) {
+
+
+        var rowElement =
+            document.createElement(
+                "div"
+            );
+
+
+        rowElement.className =
+            "calendar-row";
+
+
+        var column;
+
+
+        for (
+            column = 0;
+            column < 7;
+            column++
+        ) {
+
+
+            var cell =
+                document.createElement(
+                    "div"
+                );
+
+
+            cell.className =
+                "calendar-day";
+
+
+            if (
+                row === 0 &&
+                column < firstDay
+            ) {
+
+                cell.innerHTML = " ";
+
+                cell.className +=
+                    " empty";
+
+            }
+
+
+            else if (
+                day > totalDays
+            ) {
+
+                cell.innerHTML = " ";
+
+                cell.className +=
+                    " empty";
+
+            }
+
+
+            else {
+
+                cell.innerHTML =
+                    day;
+
+
+                var today =
+                    new Date();
+
+
+                if (
+
+                    day ===
+                        today.getDate()
+
+                    &&
+
+                    calendarMonth ===
+                        today.getMonth()
+
+                    &&
+
+                    calendarYear ===
+                        today.getFullYear()
+
+                ) {
+
+                    cell.className +=
+                        " today";
+
+                }
+
+
+                day++;
+
+            }
+
+
+            rowElement.appendChild(
+                cell
+            );
+
         }
-      };
 
-      document.getElementById("seconds-input").onchange = function () {
-        if (!countdownRunning) {
-          countdownSeconds = getCountdownInput();
 
-          updateCountdown();
+        grid.appendChild(
+            rowElement
+        );
+
+
+        if (
+            day > totalDays
+        ) {
+
+            break;
+
         }
-      };
 
-      updateCountdown();
-      updateStopwatch();
-    </script>
-    
-  </body>
+    }
+
+}
+
+
+
+document.getElementById(
+    "previous-month"
+).onclick =
+
+function() {
+
+    calendarMonth--;
+
+
+    if (calendarMonth < 0) {
+
+        calendarMonth = 11;
+
+        calendarYear--;
+
+    }
+
+
+    renderCalendar();
+
+};
+
+
+
+document.getElementById(
+    "next-month"
+).onclick =
+
+function() {
+
+    calendarMonth++;
+
+
+    if (calendarMonth > 11) {
+
+        calendarMonth = 0;
+
+        calendarYear++;
+
+    }
+
+
+    renderCalendar();
+
+};
+
+
+
+renderCalendar();
+
+</script>
+
+
+</body>
+
 </html>
+```

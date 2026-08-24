@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Compatibilidade com navegadores antigos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Meu Painel</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+
+        width: 100%;
+        min-height: 100%;
+
+        background: #0b0b10;
+
+        color: #ffffff;
+
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      /* ============================================
+   APP
+============================================ */
+
+      .app {
+        width: 100%;
+        min-height: 100vh;
+
+        background: linear-gradient(
+          135deg,
+          #0b0b10 0%,
+          #11101a 50%,
+          #0b0b10 100%
+        );
+      }
+
+      /* ============================================
+   CABEÇALHO
+============================================ */
+
+      .header {
+        position: relative;
+
+        height: 145px;
+
+        padding: 25px 35px;
+
+        background: #101017;
+
+        border-bottom: 1px solid #25212f;
+
+        display: table;
+
+        width: 100%;
+
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      /*
+    Pequeno detalhe roxo no topo
+*/
+
+      .header:before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 35px;
+
+        width: 55px;
+        height: 3px;
+
+        background: #7c4dff;
+      }
+
+      /* ============================================
+   DATA
+============================================ */
+
+      .date-area {
+        display: table-cell;
+
+        vertical-align: middle;
+      }
+
+      #day-name {
+        font-size: 19px;
+
+        font-weight: bold;
+
+        letter-spacing: 3px;
+
+        color: #eeeeee;
+      }
+
+      #full-date {
+        margin-top: 10px;
+
+        font-size: 12px;
+
+        letter-spacing: 2px;
+
+        color: #777383;
+      }
+
+      /* ============================================
+   RELÓGIO
+============================================ */
+
+      .clock {
+        display: table-cell;
+
+        vertical-align: middle;
+
+        text-align: right;
+
+        font-size: 62px;
+
+        line-height: 1;
+
+        font-weight: bold;
+
+        letter-spacing: 3px;
+
+        color: #ffffff;
+
+        text-shadow: 0 0 20px rgba(124, 77, 255, 0.18);
+      }
+
+      /* ============================================
+   CONTEÚDO
+============================================ */
+
+      .content {
+        width: 100%;
+
+        padding: 22px 30px;
+
+        display: table;
+
+        table-layout: fixed;
+      }
+
+      /* ============================================
+   CARDS
+============================================ */
+
+      .card {
+        position: relative;
+
+        display: table-cell;
+
+        vertical-align: top;
+
+        height: 405px;
+
+        padding: 22px;
+
+        background: #15151d;
+
+        border: 1px solid #272431;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+        overflow: hidden;
+      }
+
+      /*
+    Linha decorativa no topo dos cards
+*/
+
+      .card:before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 2px;
+
+        background: #302b3d;
+      }
+
+      .commitments-card {
+        width: 45%;
+      }
+
+      .timer-card {
+        width: 27.5%;
+
+        border-left: none;
+      }
+
+      .countdown-card {
+        width: 27.5%;
+
+        border-left: none;
+      }
+
+      /* ============================================
+   TÍTULOS DOS CARDS
+============================================ */
+
+      .card-title {
+        height: 40px;
+
+        font-size: 11px;
+
+        font-weight: bold;
+
+        letter-spacing: 2px;
+
+        color: #898391;
+      }
+
+      #task-count {
+        float: right;
+
+        min-width: 25px;
+
+        padding: 4px 7px;
+
+        text-align: center;
+
+        background: #211c2b;
+
+        border: 1px solid #352d43;
+
+        border-radius: 10px;
+
+        color: #a996d8;
+
+        font-size: 10px;
+      }
+
+      /* ============================================
+   ÁREA DE ADICIONAR TAREFA
+============================================ */
+
+      .add-task {
+        display: table;
+
+        width: 100%;
+
+        margin-bottom: 14px;
+      }
+
+      .add-task input {
+        display: table-cell;
+
+        width: 85%;
+
+        height: 43px;
+
+        padding: 0 13px;
+
+        background: #0d0d13;
+
+        border: 1px solid #2b2733;
+
+        outline: none;
+
+        color: #ffffff;
+
+        font-size: 13px;
+      }
+
+      .add-task input::placeholder {
+        color: #55515d;
+      }
+
+      .add-task input:focus {
+        border-color: #6542a5;
+      }
+
+      .add-task button {
+        display: table-cell;
+
+        width: 15%;
+
+        height: 43px;
+
+        border: 1px solid #6e48b5;
+
+        background: #6b45ad;
+
+        color: #ffffff;
+
+        font-size: 25px;
+
+        font-weight: normal;
+
+        cursor: pointer;
+      }
+
+      .add-task button:active {
+        background: #55358d;
+      }
+
+      /* ============================================
+   LISTA DE COMPROMISSOS
+============================================ */
+
+      .task-list {
+        height: 275px;
+
+        overflow-y: auto;
+
+        padding-right: 4px;
+      }
+
+      /* ============================================
+   TAREFA
+============================================ */
+
+      .task {
+        position: relative;
+
+        min-height: 43px;
+
+        margin-bottom: 7px;
+
+        padding: 12px 40px 12px 39px;
+
+        background: #1b1a23;
+
+        border: 1px solid #27242e;
+
+        color: #dedbe3;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        transition: background 0.15s;
+      }
+
+      .task:active {
+        background: #262331;
+      }
+
+      /* Linha roxa lateral */
+
+      .task:before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 2px;
+        height: 100%;
+
+        background: #49356c;
+      }
+
+      /* ============================================
+   CHECKBOX
+============================================ */
+
+      .task-checkbox {
+        position: absolute;
+
+        left: 13px;
+        top: 13px;
+
+        width: 15px;
+        height: 15px;
+
+        border: 1px solid #655d70;
+
+        background: transparent;
+      }
+
+      /* ============================================
+   TAREFA CONCLUÍDA
+============================================ */
+
+      .task.completed {
+        color: #66626d;
+
+        text-decoration: line-through;
+      }
+
+      .task.completed .task-checkbox {
+        background: #7650b6;
+
+        border-color: #7650b6;
+      }
+
+      /* ============================================
+   BOTÃO EXCLUIR
+============================================ */
+
+      .delete-task {
+        position: absolute;
+
+        right: 9px;
+        top: 7px;
+
+        width: 25px;
+        height: 25px;
+
+        border: none;
+
+        background: transparent;
+
+        color: #57525f;
+
+        font-size: 17px;
+
+        cursor: pointer;
+      }
+
+      .delete-task:active {
+        color: #ffffff;
+      }
+
+      /* ============================================
+   CRONÔMETRO
+============================================ */
+
+      .timer-card {
+        text-align: center;
+      }
+
+      .timer-card .card-title,
+      .countdown-card .card-title {
+        text-align: left;
+      }
+
+      .big-time {
+        margin-top: 52px;
+
+        font-size: 43px;
+
+        line-height: 1;
+
+        font-weight: bold;
+
+        letter-spacing: 2px;
+
+        color: #f4f2f7;
+
+        text-shadow: 0 0 18px rgba(124, 77, 255, 0.12);
+      }
+
+      /* ============================================
+   BOTÕES
+============================================ */
+
+      .buttons {
+        margin-top: 48px;
+
+        text-align: center;
+      }
+
+      .button {
+        min-width: 100px;
+
+        height: 40px;
+
+        margin: 3px;
+
+        padding: 0 12px;
+
+        background: #201e27;
+
+        border: 1px solid #373240;
+
+        color: #b9b5c0;
+
+        font-size: 10px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+
+        cursor: pointer;
+      }
+
+      .button:active {
+        background: #302b3a;
+
+        color: #ffffff;
+      }
+
+      .button.primary {
+        background: #6b45ad;
+
+        border-color: #7952bd;
+
+        color: #ffffff;
+
+        box-shadow: 0 4px 15px rgba(107, 69, 173, 0.18);
+      }
+
+      .button.primary:active {
+        background: #55358d;
+      }
+
+      /* ============================================
+   TEMPORIZADOR
+============================================ */
+
+      .countdown-input {
+        margin-top: 5px;
+
+        display: table;
+
+        width: 100%;
+
+        text-align: center;
+      }
+
+      .countdown-input > div,
+      .countdown-input > span {
+        display: table-cell;
+
+        vertical-align: bottom;
+      }
+
+      .countdown-input label {
+        display: block;
+
+        margin-bottom: 5px;
+
+        color: #625e69;
+
+        font-size: 8px;
+
+        letter-spacing: 1px;
+      }
+
+      .countdown-input input {
+        width: 65px;
+
+        height: 35px;
+
+        background: #0d0d13;
+
+        border: 1px solid #302c38;
+
+        color: #ffffff;
+
+        text-align: center;
+
+        font-size: 16px;
+
+        outline: none;
+      }
+
+      .countdown-input input:focus {
+        border-color: #6542a5;
+      }
+
+      .countdown-input > span {
+        width: 15px;
+
+        padding-bottom: 7px;
+
+        color: #6d6875;
+
+        font-size: 18px;
+      }
+
+      /* ============================================
+   TEMPORIZADOR FINALIZADO
+============================================ */
+
+      .countdown-finished {
+        color: #ffffff !important;
+
+        text-shadow: 0 0 20px rgba(124, 77, 255, 0.5);
+      }
+
+      /* ============================================
+   RODAPÉ
+============================================ */
+
+      .footer {
+        height: 40px;
+
+        padding-top: 12px;
+
+        text-align: center;
+
+        color: #44414c;
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+      }
+
+      /* ============================================
+   TABLETS
+============================================ */
+
+      @media screen and (max-width: 800px) {
+        .header {
+          height: 115px;
+
+          padding: 18px 20px;
+        }
+
+        .header:before {
+          left: 20px;
+        }
+
+        #day-name {
+          font-size: 14px;
+
+          letter-spacing: 2px;
+        }
+
+        #full-date {
+          font-size: 10px;
+        }
+
+        .clock {
+          font-size: 43px;
+        }
+
+        .content {
+          padding: 15px;
+        }
+
+        .card {
+          padding: 16px;
+
+          height: 370px;
+        }
+
+        .big-time {
+          font-size: 34px;
+        }
+
+        .button {
+          min-width: 82px;
+
+          height: 38px;
+        }
+      }
+
+      /* ============================================
+   MODO RETRATO
+============================================ */
+
+      @media screen and (orientation: portrait) {
+        .header {
+          height: auto;
+
+          padding: 20px;
+        }
+
+        .date-area,
+        .clock {
+          display: block;
+
+          text-align: center;
+        }
+
+        .clock {
+          margin-top: 15px;
+
+          font-size: 48px;
+        }
+
+        .content {
+          display: block;
+
+          padding: 15px;
+        }
+
+        .card {
+          display: block;
+
+          width: 100% !important;
+
+          height: auto;
+
+          min-height: 360px;
+
+          margin-bottom: 15px;
+
+          border-left: 1px solid #272431;
+        }
+
+        .task-list {
+          height: 220px;
+        }
+      }
+    </style>
+
+    <div class="app">
+      <!-- CABEÇALHO -->
+      <header class="header">
+        <div class="date-area">
+          <div id="day-name">SEGUNDA-FEIRA</div>
+          <div id="full-date">24 DE AGOSTO DE 2026</div>
+        </div>
+
+        <div class="clock" id="clock">00:00</div>
+      </header>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="content">
+        <!-- COMPROMISSOS -->
+        <section class="card commitments-card">
+          <div class="card-title">
+            <span>COMPROMISSOS</span>
+            <span id="task-count">0</span>
+          </div>
+
+          <div class="add-task">
+            <input
+              type="text"
+              id="task-input"
+              placeholder="Adicionar compromisso..."
+              maxlength="80"
+            />
+
+            <button id="add-task-button">+</button>
+          </div>
+
+          <div id="task-list" class="task-list">
+            <!-- tarefas aparecem aqui -->
+          </div>
+        </section>
+
+        <!-- CRONÔMETRO -->
+        <section class="card timer-card">
+          <div class="card-title">CRONÔMETRO</div>
+
+          <div class="big-time" id="stopwatch">00:00:00</div>
+
+          <div class="buttons">
+            <button class="button primary" id="stopwatch-start">INICIAR</button>
+
+            <button class="button" id="stopwatch-reset">ZERAR</button>
+          </div>
+        </section>
+
+        <!-- TEMPORIZADOR -->
+        <section class="card countdown-card">
+          <div class="card-title">TEMPORIZADOR</div>
+
+          <div class="countdown-input">
+            <div>
+              <label>MIN</label>
+              <input
+                type="number"
+                id="minutes-input"
+                value="25"
+                min="0"
+                max="99"
+              />
+            </div>
+
+            <span>:</span>
+
+            <div>
+              <label>SEG</label>
+              <input
+                type="number"
+                id="seconds-input"
+                value="00"
+                min="0"
+                max="59"
+              />
+            </div>
+          </div>
+
+          <div class="big-time" id="countdown">25:00</div>
+
+          <div class="buttons">
+            <button class="button primary" id="countdown-start">INICIAR</button>
+
+            <button class="button" id="countdown-reset">ZERAR</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- RODAPÉ -->
+      <footer class="footer">PAINEL DE PRODUTIVIDADE</footer>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+
+    <script>
+      /*
+    PAINEL DE PRODUTIVIDADE
+    JavaScript puro
+    Compatível com navegadores antigos
+*/
+
+      /* =====================================================
+   DATA E HORA
+===================================================== */
+
+      var days = [
+        "DOMINGO",
+        "SEGUNDA-FEIRA",
+        "TERÇA-FEIRA",
+        "QUARTA-FEIRA",
+        "QUINTA-FEIRA",
+        "SEXTA-FEIRA",
+        "SÁBADO",
+      ];
+
+      var months = [
+        "JANEIRO",
+        "FEVEREIRO",
+        "MARÇO",
+        "ABRIL",
+        "MAIO",
+        "JUNHO",
+        "JULHO",
+        "AGOSTO",
+        "SETEMBRO",
+        "OUTUBRO",
+        "NOVEMBRO",
+        "DEZEMBRO",
+      ];
+
+      function updateDateTime() {
+        var now = new Date();
+
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
+        document.getElementById("clock").innerHTML = hours + ":" + minutes;
+
+        document.getElementById("day-name").innerHTML = days[now.getDay()];
+
+        document.getElementById("full-date").innerHTML =
+          now.getDate() +
+          " DE " +
+          months[now.getMonth()] +
+          " DE " +
+          now.getFullYear();
+      }
+
+      updateDateTime();
+
+      setInterval(updateDateTime, 1000);
+
+      /* =====================================================
+   COMPROMISSOS
+===================================================== */
+
+      var tasks = [];
+
+      try {
+        var savedTasks = localStorage.getItem("tablet_tasks");
+
+        if (savedTasks) {
+          tasks = JSON.parse(savedTasks);
+        }
+      } catch (e) {
+        tasks = [];
+      }
+
+      function saveTasks() {
+        try {
+          localStorage.setItem("tablet_tasks", JSON.stringify(tasks));
+        } catch (e) {
+          // Caso o navegador não permita localStorage.
+        }
+      }
+
+      function renderTasks() {
+        var list = document.getElementById("task-list");
+
+        list.innerHTML = "";
+
+        var i;
+
+        for (i = 0; i < tasks.length; i++) {
+          var task = tasks[i];
+
+          var div = document.createElement("div");
+
+          div.className = "task";
+
+          if (task.completed) {
+            div.className += " completed";
+          }
+
+          var checkbox = document.createElement("span");
+
+          checkbox.className = "task-checkbox";
+
+          var text = document.createElement("span");
+
+          text.innerHTML = escapeHtml(task.text);
+
+          var deleteButton = document.createElement("button");
+
+          deleteButton.className = "delete-task";
+
+          deleteButton.innerHTML = "×";
+
+          (function (index) {
+            div.onclick = function () {
+              tasks[index].completed = !tasks[index].completed;
+
+              saveTasks();
+
+              renderTasks();
+            };
+
+            deleteButton.onclick = function (event) {
+              if (event) {
+                event.cancelBubble = true;
+              }
+
+              tasks.splice(index, 1);
+
+              saveTasks();
+
+              renderTasks();
+            };
+          })(i);
+
+          div.appendChild(checkbox);
+
+          div.appendChild(text);
+
+          div.appendChild(deleteButton);
+
+          list.appendChild(div);
+        }
+
+        document.getElementById("task-count").innerHTML = tasks.length;
+      }
+
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function addTask() {
+        var input = document.getElementById("task-input");
+
+        var text = input.value.replace(/^\s+|\s+$/g, "");
+
+        if (text === "") {
+          return;
+        }
+
+        tasks.push({
+          text: text,
+
+          completed: false,
+        });
+
+        saveTasks();
+
+        renderTasks();
+
+        input.value = "";
+
+        input.focus();
+      }
+
+      document.getElementById("add-task-button").onclick = addTask;
+
+      document.getElementById("task-input").onkeypress = function (event) {
+        event = event || window.event;
+
+        if (event.keyCode === 13) {
+          addTask();
+        }
+      };
+
+      renderTasks();
+
+      /* =====================================================
+   CRONÔMETRO
+===================================================== */
+
+      var stopwatchRunning = false;
+
+      var stopwatchSeconds = 0;
+
+      var stopwatchInterval = null;
+
+      function formatStopwatch(seconds) {
+        var hours = Math.floor(seconds / 3600);
+
+        var minutes = Math.floor((seconds % 3600) / 60);
+
+        var secs = seconds % 60;
+
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
+        if (secs < 10) {
+          secs = "0" + secs;
+        }
+
+        return hours + ":" + minutes + ":" + secs;
+      }
+
+      function updateStopwatch() {
+        document.getElementById("stopwatch").innerHTML =
+          formatStopwatch(stopwatchSeconds);
+      }
+
+      function startStopwatch() {
+        if (stopwatchRunning) {
+          stopwatchRunning = false;
+
+          clearInterval(stopwatchInterval);
+
+          document.getElementById("stopwatch-start").innerHTML = "CONTINUAR";
+
+          return;
+        }
+
+        stopwatchRunning = true;
+
+        document.getElementById("stopwatch-start").innerHTML = "PAUSAR";
+
+        stopwatchInterval = setInterval(function () {
+          stopwatchSeconds++;
+
+          updateStopwatch();
+        }, 1000);
+      }
+
+      function resetStopwatch() {
+        stopwatchRunning = false;
+
+        clearInterval(stopwatchInterval);
+
+        stopwatchSeconds = 0;
+
+        updateStopwatch();
+
+        document.getElementById("stopwatch-start").innerHTML = "INICIAR";
+      }
+
+      document.getElementById("stopwatch-start").onclick = startStopwatch;
+
+      document.getElementById("stopwatch-reset").onclick = resetStopwatch;
+
+      /* =====================================================
+   TEMPORIZADOR
+===================================================== */
+
+      var countdownRunning = false;
+
+      var countdownSeconds = 1500;
+
+      var countdownInterval = null;
+
+      function getCountdownInput() {
+        var minutes = parseInt(
+          document.getElementById("minutes-input").value,
+          10,
+        );
+
+        var seconds = parseInt(
+          document.getElementById("seconds-input").value,
+          10,
+        );
+
+        if (isNaN(minutes)) {
+          minutes = 0;
+        }
+
+        if (isNaN(seconds)) {
+          seconds = 0;
+        }
+
+        if (seconds > 59) {
+          seconds = 59;
+        }
+
+        if (seconds < 0) {
+          seconds = 0;
+        }
+
+        if (minutes < 0) {
+          minutes = 0;
+        }
+
+        return minutes * 60 + seconds;
+      }
+
+      function formatCountdown(seconds) {
+        var minutes = Math.floor(seconds / 60);
+
+        var secs = seconds % 60;
+
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
+        if (secs < 10) {
+          secs = "0" + secs;
+        }
+
+        return minutes + ":" + secs;
+      }
+
+      function updateCountdown() {
+        document.getElementById("countdown").innerHTML =
+          formatCountdown(countdownSeconds);
+      }
+
+      function startCountdown() {
+        if (countdownRunning) {
+          countdownRunning = false;
+
+          clearInterval(countdownInterval);
+
+          document.getElementById("countdown-start").innerHTML = "CONTINUAR";
+
+          return;
+        }
+
+        if (countdownSeconds <= 0) {
+          countdownSeconds = getCountdownInput();
+        }
+
+        if (countdownSeconds <= 0) {
+          return;
+        }
+
+        countdownRunning = true;
+
+        document.getElementById("countdown-start").innerHTML = "PAUSAR";
+
+        countdownInterval = setInterval(function () {
+          countdownSeconds--;
+
+          updateCountdown();
+
+          if (countdownSeconds <= 0) {
+            finishCountdown();
+          }
+        }, 1000);
+      }
+
+      function finishCountdown() {
+        countdownRunning = false;
+
+        clearInterval(countdownInterval);
+
+        document.getElementById("countdown-start").innerHTML = "INICIAR";
+
+        document.getElementById("countdown").className =
+          "big-time countdown-finished";
+
+        try {
+          if (navigator.vibrate) {
+            navigator.vibrate([500, 200, 500]);
+          }
+        } catch (e) {}
+
+        setTimeout(function () {
+          document.getElementById("countdown").className = "big-time";
+        }, 5000);
+      }
+
+      function resetCountdown() {
+        countdownRunning = false;
+
+        clearInterval(countdownInterval);
+
+        countdownSeconds = getCountdownInput();
+
+        updateCountdown();
+
+        document.getElementById("countdown-start").innerHTML = "INICIAR";
+
+        document.getElementById("countdown").className = "big-time";
+      }
+
+      document.getElementById("countdown-start").onclick = startCountdown;
+
+      document.getElementById("countdown-reset").onclick = resetCountdown;
+
+      document.getElementById("minutes-input").onchange = function () {
+        if (!countdownRunning) {
+          countdownSeconds = getCountdownInput();
+
+          updateCountdown();
+        }
+      };
+
+      document.getElementById("seconds-input").onchange = function () {
+        if (!countdownRunning) {
+          countdownSeconds = getCountdownInput();
+
+          updateCountdown();
+        }
+      };
+
+      updateCountdown();
+      updateStopwatch();
+    </script>
+    
+  </body>
+</html>

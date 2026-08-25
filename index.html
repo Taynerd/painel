@@ -1582,73 +1582,218 @@
 
         renderCalendar();
       };
-      /* =====================================================
+/* =====================================================
    MODO RELÓGIO EM TELA CHEIA
 ===================================================== */
 
-      var clockElement = document.getElementById("clock");
+var clockElement =
+    document.getElementById("clock");
 
-      var fullscreenClock = document.getElementById("clock-fullscreen");
+var fullscreenClock =
+    document.getElementById("clock-fullscreen");
 
-      var fullscreenTime = document.getElementById("fullscreen-time");
+var fullscreenTime =
+    document.getElementById("fullscreen-time");
 
-      /*
-   Abre o modo tela cheia
-*/
+var wakeLock = null;
 
-      function openFullscreenClock() {
-        fullscreenClock.style.display = "flex";
+
+/* =====================================================
+   TENTAR MANTER A TELA ACESA
+===================================================== */
+
+function requestWakeLock() {
+
+    try {
+
+        if (
+            navigator.wakeLock &&
+            navigator.wakeLock.request
+        ) {
+
+            navigator.wakeLock.request("screen")
+                .then(function(lock) {
+
+                    wakeLock = lock;
+
+                    console.log(
+                        "Tela mantida ligada"
+                    );
+
+                })
+                .catch(function(error) {
+
+                    console.log(
+                        "Wake Lock não disponível",
+                        error
+                    );
+
+                });
+
+        } else {
+
+            console.log(
+                "Este navegador não possui Wake Lock"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Wake Lock não disponível"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LIBERAR WAKE LOCK
+===================================================== */
+
+function releaseWakeLock() {
+
+    try {
+
+        if (wakeLock) {
+
+            wakeLock.release();
+
+            wakeLock = null;
+
+        }
+
+    } catch (error) {
+
+        wakeLock = null;
+
+    }
+
+}
+
+
+/* =====================================================
+   ABRIR RELÓGIO FULLSCREEN
+===================================================== */
+
+function openFullscreenClock() {
+
+    fullscreenClock.style.display = "flex";
+
+    updateFullscreenClock();
+
+    requestWakeLock();
+
+}
+
+
+/* =====================================================
+   FECHAR RELÓGIO FULLSCREEN
+===================================================== */
+
+function closeFullscreenClock() {
+
+    fullscreenClock.style.display = "none";
+
+    releaseWakeLock();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR RELÓGIO
+===================================================== */
+
+function updateFullscreenClock() {
+
+    var now = new Date();
+
+    var hours =
+        now.getHours();
+
+    var minutes =
+        now.getMinutes();
+
+    var seconds =
+        now.getSeconds();
+
+
+    if (hours < 10) {
+
+        hours = "0" + hours;
+
+    }
+
+
+    if (minutes < 10) {
+
+        minutes = "0" + minutes;
+
+    }
+
+
+    if (seconds < 10) {
+
+        seconds = "0" + seconds;
+
+    }
+
+
+    fullscreenTime.innerHTML =
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds;
+
+}
+
+
+/* =====================================================
+   CLIQUE NO RELÓGIO NORMAL
+===================================================== */
+
+clockElement.onclick = function(event) {
+
+    if (event) {
+
+        event.stopPropagation();
+
+    }
+
+    openFullscreenClock();
+
+};
+
+
+/* =====================================================
+   CLIQUE EM QUALQUER LUGAR DO FULLSCREEN
+===================================================== */
+
+fullscreenClock.onclick = function() {
+
+    closeFullscreenClock();
+
+};
+
+
+/* =====================================================
+   ATUALIZAR A CADA SEGUNDO
+===================================================== */
+
+setInterval(
+
+    function() {
 
         updateFullscreenClock();
-      }
 
-      /*
-   Fecha o modo tela cheia
-*/
+    },
 
-      function closeFullscreenClock() {
-        fullscreenClock.style.display = "none";
-      }
+    1000
 
-      /*
-   Atualiza o relógio com segundos
-*/
-
-      function updateFullscreenClock() {
-        var now = new Date();
-
-        var hours = now.getHours();
-
-        var minutes = now.getMinutes();
-
-        var seconds = now.getSeconds();
-
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
-
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-
-        fullscreenTime.innerHTML = hours + ":" + minutes + ":" + seconds;
-      }
-
-      /*
-   Clique no relógio normal
-*/
-
-      clockElement.onclick = function (event) {
-        if (event) {
-          event.stopPropagation();
-        }
-
-        openFullscreenClock();
-      };
+);
 
       /*
    Qualquer toque na tela cheia

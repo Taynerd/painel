@@ -300,13 +300,13 @@ body {
 
     height: 35px;
 
-    font-size: 12px;
+    font-size: 18px;
 
     font-weight: bold;
 
     letter-spacing: 2px;
 
-    color: #918b9b;
+    color: #eeeeee;
 }
 
 
@@ -366,7 +366,7 @@ body {
 
 .add-task input::placeholder {
 
-    color: #56515e;
+    color: #a49eaf;
 }
 
 
@@ -428,7 +428,7 @@ body {
 
     border: 1px solid #282530;
 
-    color: #dedbe4;
+    color: #fdfdff;
 
     font-size: 20px;
 
@@ -463,13 +463,13 @@ body {
     height: 15px;
 
     border:
-        1px solid #716a7c;
+        1px solid #fdfdfd;
 }
 
 
 .task.completed {
 
-    color: #67626f;
+    color: #d2cdda;
 
     text-decoration: line-through;
 }
@@ -497,7 +497,7 @@ body {
 
     background: transparent;
 
-    color: #5d5766;
+    color: #e4e1e9;
 
     font-size: 18px;
 
@@ -518,6 +518,7 @@ body {
     table-layout: fixed;
 
     margin-bottom: 15px;
+
 }
 
 
@@ -527,12 +528,11 @@ body {
 
     width: 50%;
 
-    height: 260px;
+    height: 400px;
 
     padding: 20px;
 
     text-align: center;
-
     background: #15151d;
 
     border: 1px solid #292532;
@@ -555,13 +555,13 @@ body {
 
     height: 30px;
 
-    font-size: 11px;
+    font-size: 18px;
 
     font-weight: bold;
 
     letter-spacing: 2px;
 
-    color: #918b9b;
+    color: #d3d3d3;
 }
 
 
@@ -573,7 +573,7 @@ body {
 
     margin-top: 22px;
 
-    font-size: 60px;
+    font-size: 70px;
 
     font-weight: bold;
 
@@ -593,9 +593,9 @@ body {
 
 .button {
 
-    min-width: 100px;
+    min-width: 110px;
 
-    height: 38px;
+    height: 42px;
 
     margin: 3px;
 
@@ -637,8 +637,64 @@ body {
 
 
 /* =====================================================
-   INPUT TEMPORIZADOR
+   TEMPOS PREDEFINIDOS
 ===================================================== */
+
+.preset-times {
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+.preset-button {
+
+    height: 30px;
+
+    min-width: 65px;
+
+    margin: 2px;
+
+    padding: 0 8px;
+
+    background: #1c1a22;
+
+    border: 1px solid #393442;
+
+    color: #817b8b;
+
+    font-size: 10px;
+
+    font-weight: bold;
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+}
+
+
+.preset-button:active {
+
+    background: #332c40;
+
+}
+
+
+/* Tempo selecionado */
+
+.preset-button.active {
+
+    background: #6945a6;
+
+    border-color: #8058bc;
+
+    color: #ffffff;
+
+}
 
 .countdown-input {
 
@@ -738,7 +794,7 @@ body {
 
     vertical-align: middle;
 
-    font-size: 14px;
+    font-size: 18px;
 
     font-weight: bold;
 
@@ -760,9 +816,9 @@ body {
 
 .calendar-controls button {
 
-    width: 32px;
+    width: 35px;
 
-    height: 28px;
+    height: 31px;
 
     margin-left: 4px;
 
@@ -809,9 +865,9 @@ body {
 
     text-align: center;
 
-    color: #625d6b;
+    color: #c2bfc7;
 
-    font-size: 9px;
+    font-size: 12px;
 
     font-weight: bold;
 
@@ -845,13 +901,13 @@ body {
 
     display: table-cell;
 
-    height: 48px;
+    height: 70px;
 
     text-align: center;
 
     vertical-align: middle;
 
-    color: #a7a2ad;
+    color: #d7d6d8;
 
     font-size: 18px;
     font-weight: 600;
@@ -1168,72 +1224,65 @@ body {
         TEMPORIZADOR
     </div>
 
+<div class="big-time" id="countdown">
+    15:00
+</div>
 
-    <div class="countdown-input">
+<div class="buttons">
 
-        <div>
+    <button
+        class="button primary"
+        id="countdown-start">
 
-            <label>MIN</label>
+        INICIAR
 
-            <input
-                type="number"
-                id="minutes-input"
-                value="25"
-                min="0"
-                max="99"
-            >
+    </button>
 
-        </div>
+    <button
+        class="button"
+        id="countdown-reset">
 
+        ZERAR
 
-        <span>:</span>
+    </button>
 
+</div>
 
-        <div>
+<div class="preset-times">
 
-            <label>SEG</label>
+    <button
+        class="preset-button active"
+        data-minutes="15">
 
-            <input
-                type="number"
-                id="seconds-input"
-                value="00"
-                min="0"
-                max="59"
-            >
+        15 MIN
 
-        </div>
+    </button>
 
-    </div>
+    <button
+        class="preset-button"
+        data-minutes="25">
 
+        25 MIN
 
-    <div class="big-time"
-         id="countdown">
+    </button>
 
-        25:00
+    <button
+        class="preset-button"
+        data-minutes="30">
 
-    </div>
+        30 MIN
 
+    </button>
 
-    <div class="buttons">
+    <button
+        class="preset-button"
+        data-minutes="60">
 
-        <button
-            class="button primary"
-            id="countdown-start">
+        60 MIN
 
-            INICIAR
+    </button>
 
-        </button>
-
-
-        <button
-            class="button"
-            id="countdown-reset">
-
-            ZERAR
-
-        </button>
-
-    </div>
+</div>
 
 </section>
 
@@ -1803,149 +1852,78 @@ document.getElementById(
 
 var countdownRunning = false;
 
-var countdownSeconds = 1500;
+/* 15 minutos é o preset inicial */
+var selectedPresetMinutes = 15;
+
+var countdownSeconds = 15 * 60;
 
 var countdownInterval = null;
 
 
-
-function getCountdownInput() {
-
-    var minutes =
-        parseInt(
-            document.getElementById(
-                "minutes-input"
-            ).value,
-            10
-        );
-
-
-    var seconds =
-        parseInt(
-            document.getElementById(
-                "seconds-input"
-            ).value,
-            10
-        );
-
-
-    if (isNaN(minutes)) {
-
-        minutes = 0;
-
-    }
-
-
-    if (isNaN(seconds)) {
-
-        seconds = 0;
-
-    }
-
-
-    if (seconds > 59) {
-
-        seconds = 59;
-
-    }
-
-
-    if (minutes < 0) {
-
-        minutes = 0;
-
-    }
-
-
-    return (
-        minutes * 60
-    ) + seconds;
-
-}
-
-
+/* =====================================================
+   FORMATAR TEMPO
+===================================================== */
 
 function formatCountdown(seconds) {
 
-    var minutes =
-        Math.floor(
-            seconds / 60
-        );
+    var minutes = Math.floor(seconds / 60);
 
-
-    var secs =
-        seconds % 60;
-
+    var secs = seconds % 60;
 
     if (minutes < 10) {
-
-        minutes =
-            "0" + minutes;
-
+        minutes = "0" + minutes;
     }
-
 
     if (secs < 10) {
-
-        secs =
-            "0" + secs;
-
+        secs = "0" + secs;
     }
 
-
     return minutes + ":" + secs;
-
 }
 
 
+/* =====================================================
+   ATUALIZAR DISPLAY
+===================================================== */
 
 function updateCountdown() {
 
-    document.getElementById(
-        "countdown"
-    ).innerHTML =
-        formatCountdown(
-            countdownSeconds
-        );
+    document.getElementById("countdown").innerHTML =
+        formatCountdown(countdownSeconds);
 
 }
 
 
+/* =====================================================
+   INICIAR / PAUSAR
+===================================================== */
 
 function startCountdown() {
+
+    /* Se estiver rodando, pausa */
 
     if (countdownRunning) {
 
         countdownRunning = false;
 
-        clearInterval(
-            countdownInterval
-        );
-
+        clearInterval(countdownInterval);
 
         document.getElementById(
             "countdown-start"
-        ).innerHTML =
-            "CONTINUAR";
-
+        ).innerHTML = "CONTINUAR";
 
         return;
-
     }
 
+
+    /* Não inicia se estiver em zero */
 
     if (countdownSeconds <= 0) {
 
         countdownSeconds =
-            getCountdownInput();
+            selectedPresetMinutes * 60;
 
-    }
-
-
-    if (countdownSeconds <= 0) {
-
-        return;
-
+        updateCountdown();
     }
 
 
@@ -1954,63 +1932,62 @@ function startCountdown() {
 
     document.getElementById(
         "countdown-start"
-    ).innerHTML =
-        "PAUSAR";
+    ).innerHTML = "PAUSAR";
 
 
-    countdownInterval =
-        setInterval(
+    countdownInterval = setInterval(function() {
 
-            function() {
+        countdownSeconds--;
 
-                countdownSeconds--;
-
-                updateCountdown();
+        updateCountdown();
 
 
-                if (
-                    countdownSeconds <= 0
-                ) {
+        /* Terminou */
 
-                    finishCountdown();
+        if (countdownSeconds <= 0) {
 
-                }
+            finishCountdown();
 
-            },
+        }
 
-            1000
-
-        );
+    }, 1000);
 
 }
 
 
+/* =====================================================
+   FINALIZAR
+===================================================== */
 
 function finishCountdown() {
 
     countdownRunning = false;
 
+    clearInterval(countdownInterval);
 
-    clearInterval(
-        countdownInterval
-    );
+    countdownSeconds = 0;
+
+    updateCountdown();
 
 
     document.getElementById(
         "countdown-start"
-    ).innerHTML =
-        "INICIAR";
+    ).innerHTML = "INICIAR";
 
+
+    /* Vibração */
 
     try {
 
-        if (
-            navigator.vibrate
-        ) {
+        if (navigator.vibrate) {
 
-            navigator.vibrate(
-                [500, 200, 500]
-            );
+            navigator.vibrate([
+                500,
+                200,
+                500,
+                200,
+                500
+            ]);
 
         }
 
@@ -2019,89 +1996,134 @@ function finishCountdown() {
 }
 
 
+/* =====================================================
+   ZERAR
+===================================================== */
 
 function resetCountdown() {
 
+    /* Para o contador */
+
     countdownRunning = false;
 
+    clearInterval(countdownInterval);
 
-    clearInterval(
-        countdownInterval
-    );
 
+    /* 
+       VOLTA PARA O PRESET ESCOLHIDO
+    */
 
     countdownSeconds =
-        getCountdownInput();
+        selectedPresetMinutes * 60;
 
+
+    /* Atualiza imediatamente */
 
     updateCountdown();
 
 
+    /* Volta o botão para INICIAR */
+
     document.getElementById(
         "countdown-start"
-    ).innerHTML =
-        "INICIAR";
+    ).innerHTML = "INICIAR";
 
 }
 
 
+/* =====================================================
+   PRESETS
+===================================================== */
+
+var presetButtons =
+    document.getElementsByClassName(
+        "preset-button"
+    );
+
+
+for (
+    var i = 0;
+    i < presetButtons.length;
+    i++
+) {
+
+    presetButtons[i].onclick = function() {
+
+
+        /* Não deixa trocar durante a contagem */
+
+        if (countdownRunning) {
+
+            return;
+
+        }
+
+
+        /* Pega o tempo do botão */
+
+        selectedPresetMinutes =
+            parseInt(
+                this.getAttribute(
+                    "data-minutes"
+                ),
+                10
+            );
+
+
+        /* Define o novo tempo */
+
+        countdownSeconds =
+            selectedPresetMinutes * 60;
+
+
+        /* Remove seleção dos outros */
+
+        for (
+            var j = 0;
+            j < presetButtons.length;
+            j++
+        ) {
+
+            presetButtons[j].className =
+                "preset-button";
+
+        }
+
+
+        /* Marca o selecionado */
+
+        this.className =
+            "preset-button active";
+
+
+        /* Atualiza o relógio */
+
+        updateCountdown();
+
+    };
+
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
 
 document.getElementById(
     "countdown-start"
-).onclick =
-    startCountdown;
-
+).onclick = startCountdown;
 
 
 document.getElementById(
     "countdown-reset"
-).onclick =
-    resetCountdown;
+).onclick = resetCountdown;
 
 
-
-document.getElementById(
-    "minutes-input"
-).onchange =
-
-function() {
-
-    if (!countdownRunning) {
-
-        countdownSeconds =
-            getCountdownInput();
-
-        updateCountdown();
-
-    }
-
-};
-
-
-
-document.getElementById(
-    "seconds-input"
-).onchange =
-
-function() {
-
-    if (!countdownRunning) {
-
-        countdownSeconds =
-            getCountdownInput();
-
-        updateCountdown();
-
-    }
-
-};
-
-
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
 
 updateCountdown();
-
-updateStopwatch();
-
 
 
 /* =====================================================
